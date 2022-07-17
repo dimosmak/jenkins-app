@@ -21,6 +21,9 @@ pipeline {
                 echo "Start of Stage Deploy"
                 echo "Deploying......."
                 echo "End of Stage Build"
+		sh "docker stop $(docker ps -a -q)"
+		sh "docker build -t my-apache2 ."
+		sh "docker run -d -p 8008:80 my-apache2"
             }
         }
     }
